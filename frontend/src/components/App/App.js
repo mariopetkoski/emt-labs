@@ -7,6 +7,7 @@ import BookService from "../../repository/bookRepository";
 import Header from '../Header/header';
 import BookAdd from '../Books/BookAdd/bookAdd'
 import BookEdit from "../Books/BookEdit/bookEdit";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -34,7 +35,9 @@ class App extends Component {
                                                                  book={this.state.selectedBook} />} />
               <Route path="/books" element={<Books books={this.state.books}
                                                    onDelete={this.deleteBook}
-                                                   onEdit={this.getBook} />} />
+                                                   onEdit={this.getBook}
+                                                   onMark={this.markBook}
+              />} />
             <Route path="/categories" element={<Categories
                 categories={this.state.categories} />} />
           </Routes>
@@ -71,12 +74,6 @@ class App extends Component {
             });
     }
 
-  componentDidMount() {
-    this.loadBooks();
-    this.loadCategories();
-    this.loadAuthors();
-  }
-
   deleteBook = (id) => {
       BookService.deleteBook(id)
           .then(() => {
@@ -105,6 +102,19 @@ class App extends Component {
               this.loadBooks();
           })
   }
+
+    markBook = (id) => {
+        BookService.markBookAsTaken(id)
+            .then(() => {
+                this.loadBooks()
+            });
+    }
+
+    componentDidMount() {
+        this.loadBooks();
+        this.loadCategories();
+        this.loadAuthors();
+    }
 }
 
 export default App;

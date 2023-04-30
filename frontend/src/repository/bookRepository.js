@@ -16,7 +16,7 @@ const BookService = {
     addBook: (name, author, category, availableCopies) => {
         return axios.post("/books/add", {
             "name" : name,
-            "author" : author,
+            "authorId" : author,
             "category" : category,
             "availableCopies" : availableCopies
         })
@@ -24,14 +24,17 @@ const BookService = {
     editBook: (id, name, author, category ,availableCopies) => {
         return axios.put(`/books/edit/${id}`, {
             "name" : name,
-            "author" : author,
+            "authorId" : author,
             "category" : category,
             "availableCopies" : availableCopies
         })
     },
 
     getBook: (id) => {
-        return axios.get(`/books/${id}`)
+        return axios.get(`/books/get/${id}`)
+    },
+    markBookAsTaken: (id) => {
+        return axios.put(`/books/mark/${id}`);
     }
 }
 

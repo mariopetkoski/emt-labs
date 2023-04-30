@@ -15,13 +15,13 @@ public class BookDto {
     private Long id;
     private String name;
     private Category category;
-    private Author author;
+    private Long authorId;
     private int availableCopies;
 
-    public BookDto(String name, Category category, Author author, int availableCopies) {
+    public BookDto(String name, Category category, Long authorId, int availableCopies) {
         this.name = name;
         this.category = category;
-        this.author = author;
+        this.authorId = authorId;
         this.availableCopies = availableCopies;
     }
 }

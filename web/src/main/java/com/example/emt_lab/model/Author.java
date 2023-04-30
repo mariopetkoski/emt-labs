@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@NoArgsConstructor
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +19,8 @@ public class Author {
         this.name = name;
         this.surname = surname;
         this.country = country;
+    }
+
+    public Author() {
     }
 }

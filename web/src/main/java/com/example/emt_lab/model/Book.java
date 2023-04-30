@@ -16,7 +16,7 @@ public class Book {
     private String name;
     @Enumerated(value = EnumType.STRING)
     private Category category;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Author author;
     private int availableCopies;
 

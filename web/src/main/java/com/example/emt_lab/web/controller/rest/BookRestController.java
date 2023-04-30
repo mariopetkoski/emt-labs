@@ -53,7 +53,7 @@ public class BookRestController {
         return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping("/rent/{id}")
+    @PutMapping("/mark/{id}")
     public ResponseEntity rent(@PathVariable Long id){
         this.bookService.rentById(id);
         if(this.bookService.findById(id).isEmpty())

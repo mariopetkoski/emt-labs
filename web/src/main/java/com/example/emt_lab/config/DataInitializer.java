@@ -50,32 +50,12 @@ public class DataInitializer {
         Book book2 = new Book("Book 2", Category.CLASSICS,author2,25);
         Book book3 = new Book("Book 3", Category.BIOGRAPHY, author3,5);
 
-        BookDto bookDto1 = new BookDto(book1.getName(), book1.getCategory(), book1.getAuthor(), book1.getAvailableCopies());
-        BookDto bookDto2 = new BookDto(book2.getName(), book2.getCategory(), book2.getAuthor(), book2.getAvailableCopies());
-        BookDto bookDto3 = new BookDto(book3.getName(), book3.getCategory(), book3.getAuthor(), book3.getAvailableCopies());
+        BookDto bookDto1 = new BookDto(book1.getName(), book1.getCategory(), book1.getAuthor().getId(), book1.getAvailableCopies());
+        BookDto bookDto2 = new BookDto(book2.getName(), book2.getCategory(), book2.getAuthor().getId(), book2.getAvailableCopies());
+        BookDto bookDto3 = new BookDto(book3.getName(), book3.getCategory(), book3.getAuthor().getId(), book3.getAvailableCopies());
 
         this.bookRepository.save(book1);
         this.bookRepository.save(book2);
         this.bookRepository.save(book3);
-
-//        Country macedonia = new Country("Macedonia", "Europe");
-//        Country portugal = new Country("Portugal", "Europe");
-//        Country argentina = new Country("Argentina", "South America");
-//
-//        Author mario = new Author("Mario", "Petkoski", macedonia);
-//        Author cristiano = new Author("Cristiano", "Ronaldo", portugal);
-//        Author messi = new Author("Lionel", "Messi", argentina);
-//
-//        Book book1 = new Book("Book1", Category.DRAMA, mario, 5);
-//        Book book2 = new Book("Book2", Category.HISTORY, cristiano, 10);
-//        Book book3 = new Book("Book3", Category.BIOGRAPHY, messi, 15);
-//
-//        BookDto bookDto1 = new BookDto(book1.getName(), book1.getCategory(), book1.getAuthor(), book1.getAvailableCopies());
-//        BookDto bookDto2 = new BookDto(book2.getName(), book2.getCategory(), book2.getAuthor(), book2.getAvailableCopies());
-//        BookDto bookDto3 = new BookDto(book3.getName(), book3.getCategory(), book3.getAuthor(), book3.getAvailableCopies());
-//
-//        this.bookService.save(bookDto1);
-//        this.bookService.save(bookDto2);
-//        this.bookService.save(bookDto3);
     }
 }

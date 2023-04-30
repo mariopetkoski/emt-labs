@@ -5,8 +5,8 @@ const bookAdd = (props) => {
     const navigate = useNavigate()
     const [formData, updateFormData] = React.useState({
         name: "",
-        author : "",
-        category : "",
+        author : 1,
+        category : 1,
         availableCopies : 0
     })
 
@@ -58,7 +58,7 @@ const bookAdd = (props) => {
                         <label>Category</label>
                         <select name="category" className="form-control" onChange={handleChange}>
                             {props.categories.map((term) =>
-                                <option value={term} >{term}</option>
+                                <option value={term}>{term}</option>
                             )}
                         </select>
                     </div>
@@ -66,7 +66,7 @@ const bookAdd = (props) => {
                         <label>Author</label>
                         <select name="author" className="form-control" onChange={handleChange}>
                             {props.authors.map((term) =>
-                                <option value={term.id}>{term.name}</option>
+                                <option value={term.id}>{term.name}  {term.surname}</option>
                             )}
                         </select>
                     </div>

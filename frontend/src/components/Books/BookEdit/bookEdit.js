@@ -5,8 +5,8 @@ const BookEdit = (props) => {
     const navigate = useNavigate()
     const [formData, updateFormData] = React.useState({
         name: "",
-        author : 0,
-        category : 0,
+        author : 1,
+        category : 1,
         availableCopies : 0
     })
     const handleChange = (e) => {
@@ -19,8 +19,8 @@ const BookEdit = (props) => {
     const onFormSubmit = (e) => {
         e.preventDefault();
         const  name = formData.name !== "" ? formData.name : props.book.name;
-        const author = formData.author !== 0 ? formData.author : props.book.author;
-        const category = formData.category !== 0 ? formData.category : props.book.category;
+        const author = formData.author !== 1 ? formData.author : props.book.author.id;
+        const category = formData.category !== 1 ? formData.category : props.book.category;
         const availableCopies = formData.availableCopies !== 0 ? formData.availableCopies : props.book.availableCopies;
 
         props.onEditBook(props.book.id ,name, author, category, availableCopies);
@@ -44,7 +44,7 @@ const BookEdit = (props) => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="quantity">Available Copies</label>
-                        <input type="text"
+                        <input type="number"
                                className="form-control"
                                id="availableCopies"
                                name="availableCopies"

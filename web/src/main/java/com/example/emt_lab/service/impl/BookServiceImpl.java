@@ -3,6 +3,8 @@ package com.example.emt_lab.service.impl;
 import com.example.emt_lab.model.Author;
 import com.example.emt_lab.model.Book;
 import com.example.emt_lab.model.dto.BookDto;
+import com.example.emt_lab.model.enumerations.Category;
+import com.example.emt_lab.model.exceptions.AuthorNotFoundException;
 import com.example.emt_lab.model.exceptions.BookNotFoundException;
 import com.example.emt_lab.model.exceptions.notAvailableCopiesException;
 import com.example.emt_lab.repository.AuthorRepository;
@@ -38,17 +40,21 @@ public class BookServiceImpl implements BookService {
     public Optional<Book> save(BookDto bookDto) {
 
         //TODO save by authorId instead of author object, fix this in edit too
-        Author author = this.authorRepository.findById(bookDto.getAuthor().getId()).get();
-        
-        return Optional.of(this.bookRepository.save(new Book(bookDto.getName(), bookDto.getCategory(), bookDto.getAuthor(), bookDto.getAvailableCopies())));
+        Author author = authorRepository.findById(bookDto.getAuthorId()).orElseThrow(()->
+                new AuthorNotFoundException(bookDto.getAuthorId()));
+        Category category = Category.valueOf(bookDto.getCategory().toString());
+//        this.bookRepository.deleteBookByName(bookDto.getName());
+        return Optional.of(this.bookRepository.save(new Book(bookDto.getName(), category, author, bookDto.getAvailableCopies())));
     }
 
     @Override
     public Optional<Book> edit(Long id, BookDto bookDto){
         Book book = this.bookRepository.findById(id).orElseThrow(() -> new BookNotFoundException(id));
+        Author author = this.authorRepository.findById(bookDto.getAuthorId()).orElseThrow(()-> new AuthorNotFoundException(bookDto.getAuthorId()));
+        Category category = Category.valueOf(bookDto.getCategory().toString());
         book.setName(bookDto.getName());
-        book.setCategory(bookDto.getCategory());
-        book.setAuthor(bookDto.getAuthor());
+        book.setCategory(category);
+        book.setAuthor(author);
         book.setAvailableCopies(bookDto.getAvailableCopies());
         return Optional.of(this.bookRepository.save(book));
     }
